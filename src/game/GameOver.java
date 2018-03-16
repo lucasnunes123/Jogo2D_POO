@@ -8,9 +8,24 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+/**
+ * 
+ * @author Lucas Nunes GS
+ */
+
+/**
+ * 
+ * Tela de Game over.
+ */
 public class GameOver extends Scene{
     private final Image gameover = new Image("ima/gameover.png");
     Label Capar_the_cat, Voltaraomenu;
+    /**
+     * 
+     * @param root Nó raiz.
+     * @param width definição de largura da tela de Game Over.
+     * @param height definição de altura da tela de Game Over.
+     */
     public GameOver(Pane root, double width, double height) {
         super(root, 800, 400);
         ImageView fundo2 = new ImageView(gameover);

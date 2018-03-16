@@ -1,5 +1,9 @@
 package game;
 
+import game.BarradeVida;
+import game.Menu;
+import game.Personagem;
+import game.Tangue;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -8,15 +12,19 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-
 /**
  *
  * @author Lucas Nunes GS
  */
-
+/**
+ * 
+ * Classe da 2° fase. 
+ */
 public class Desert extends Scene {
     int countvida = 130;
     int countinimigo = 140;          //contadores de vida
+    
+    Tiro tiro = new Tiro();
     
     Label Vida = new Label();
     Label nomeF = new Label();
@@ -32,9 +40,16 @@ public class Desert extends Scene {
     Rectangle contornoLife = new Rectangle();
     Rectangle Bini = new Rectangle();
     BarradeVida life = new BarradeVida();
-    
+    /**
+     * 
+     * @param root Nó raiz.
+     * @param width definido largura da tela de 2°fase.
+     * @param height defindo altura da tela de 2°fase.
+     */
+    private Pane root;
     public Desert(Pane root, double width, double height) {
         super(root, width, height);
+        this.root = root;
         ImageView fundo1 = new ImageView(syberian);
         fundo1.setScaleX(2);
         fundo1.setScaleY(1.22);
@@ -83,6 +98,9 @@ public class Desert extends Scene {
         }   
             
     }
+    /**
+     * Método para contar tamanho da barra de vida do personagem e inimigo.
+     */
     public void Danotyra(){
           boolean status = tyra.getBoundsInLocal().intersects(soldado.getBoundsInLocal());
           if(status == true){
@@ -92,7 +110,11 @@ public class Desert extends Scene {
             Lini = Lini - 15;
             Bini.setWidth(Bini.getWidth()-10);
     }
-    }public void countvida(){
+    }
+    /**
+     * Método para contador de vida do personagem e do inimigo.
+     */
+    public void countvida(){
         boolean status = tyra.getBoundsInLocal().intersects(soldado.getBoundsInLocal());
          if(status == true){
             countvida = countvida - 5;
@@ -100,6 +122,21 @@ public class Desert extends Scene {
             countinimigo = countinimigo - 7;
             }
             
+    }
+    public Personagem getTyra() {
+        return tyra;
+    }
+
+    public Tangue getSoldado() {
+        return soldado;
+    }
+
+    public Tiro getTiro() {
+        return tiro;
+    }
+
+    public Pane getRoot2() {
+        return root;
     }
     
 }

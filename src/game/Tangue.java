@@ -11,11 +11,24 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
-
+/**
+ * 
+ * @author Lucas Nunes GS
+ */
+/**
+ * 
+ * Classe Tanque(chefão).
+ */
 public class Tangue extends Rectangle {
         
     TranslateTransition MovTanque = new TranslateTransition(Duration.millis(400),this);
-    
+    /**
+     * 
+     * @param posicaox Definição da posição do tanque no eixo X.
+     * @param posicaoy Definição da posição do tanque no eixo Y.
+     * @param width Definição da largura do tanque.
+     * @param height Definição da altura do tanque.
+     */
     Tangue(int posicaox, int posicaoy, int width, int height) {
         this.setX(300);
         this.setY(posicaoy);

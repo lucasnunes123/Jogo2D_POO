@@ -1,5 +1,14 @@
 package game;
 
+import game.BarradeVida;
+import game.BarradeVida;
+import game.Inimigo;
+import game.Inimigo;
+import game.Menu;
+import game.Menu;
+import game.Personagem;
+import game.Personagem;
+import game.Tiro;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -10,23 +19,35 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
-
+/**
+ * 
+ * @author Lucas Nunes GS
+ */
+/**
+ * 
+ * Classe 1°fase.
+ */
 public class syberian1 extends Scene{
+    /**
+     *  Variáveis para contar vida do personagem e dos soldados
+    */
     int countvida = 140;
-    int countvidainimigo = 100;         //Contadores de vida
+    int countvidainimigo = 100;
     int contvidaini = 100;
-    
+    /**
+     *  Labels "Syberian","Life","Inimigo".
+     */
     Label Vida = new Label();
-    Label nomeF = new Label();   //Labal "Life","nome da Fase","nome inimigo"
+    Label LabelFase = new Label();
     Label nomei = new Label();
     
-    double LarguraBvida = 250,LarguraBinimigo = 250; //Larguras das barras de vida
+    double LarguraBvida = 250,LarguraBinimigo = 250;
+    
+    Tiro tiro = new Tiro();
+    
     
     private final Image syberian = new Image("ima/Syberian.png");   
     private final Image bala = new Image("ima/tiro.gif");
-    
-    ImageView tiro = new ImageView(bala);
-    TranslateTransition fire = new TranslateTransition(Duration.millis(1700),tiro);
     
     
     Personagem tyra = new Personagem(25,290,70, 70);
@@ -37,9 +58,16 @@ public class syberian1 extends Scene{
     Rectangle contornoLife = new Rectangle();//contorno barra vida Tyra
     Rectangle Barravidainimigo = new Rectangle();//Barra inimigo
     BarradeVida lifeBarra = new BarradeVida();//Barra vida Tyra
-    
+    /**
+     * 
+     * @param root Nó raiz de tela. 
+     * @param width definindo largura da tela de 1°fase.
+     * @param height definindo altura da tela de 1°fase.
+     */
+    private Pane root;
     public syberian1(Pane root, double width, double height) {
         super(root, width, height);
+        this.root = root;
         ImageView fundo1 = new ImageView(syberian);
         fundo1.setScaleX(2);                                 //Configurações da imagem de fundo
         fundo1.setScaleY(1.22);
@@ -51,16 +79,6 @@ public class syberian1 extends Scene{
 	Vida.setLayoutY(28);
 	Vida.setFont(vida);  
         
-        tiro.setX(25);
-        tiro.setY(320);
-        tiro.setFitHeight(4);
-        tiro.setFitWidth(30);
-        tiro.setImage(bala);
-        
-        fire.setByX(25);
-        fire.setByX(1000);
-        fire.setCycleCount((int) 6f);
-        fire.setAutoReverse(true);
         
         nomei = new Label("Inimigo");
         nomei.setTextFill(Color.WHITE);
@@ -86,15 +104,18 @@ public class syberian1 extends Scene{
         contornoLife.setHeight(30.4);     //Config. contorno barra Life
         contornoLife.setFill(Color.WHITE);
         
-        nomeF = new Label("SYBERIAN");
-        nomeF.setTextFill(Color.WHITE);
-	nomeF.setLayoutX(26);             //Config.Label Fase
-	nomeF.setLayoutY(60);              
-	nomeF.setFont(vida);
+        LabelFase = new Label("SYBERIAN");
+        LabelFase.setTextFill(Color.WHITE);
+	LabelFase.setLayoutX(26);             //Config.Label Fase
+	LabelFase.setLayoutY(60);              
+	LabelFase.setFont(vida);
        
-        root.getChildren().addAll(fundo1,tyra,contornoLife,contornoinimigo,lifeBarra,Barravidainimigo,Vida,soldado,nomeF,nomei,soldado2);
+        root.getChildren().addAll(fundo1,tyra,contornoLife,contornoinimigo,lifeBarra,Barravidainimigo,Vida,soldado,LabelFase,nomei,soldado2);
                       
     }
+    /**
+     *  Método para a largura da barra de vida do personagem e do inimigo.
+     */
     public void Danotyra(){
           boolean status = tyra.getBoundsInLocal().intersects(soldado.getBoundsInLocal());
           if(status == true){
@@ -104,14 +125,22 @@ public class syberian1 extends Scene{
             LarguraBinimigo = LarguraBinimigo - 15;
             Barravidainimigo.setWidth(Barravidainimigo.getWidth()-20); //diminuindo vida
     }
-    }public void countvida(){
+    }
+    /**
+     *  Método para contar a vida do personagem.
+     */
+    public void countvida(){
         boolean status = tyra.getBoundsInLocal().intersects(soldado.getBoundsInLocal());
          if(status == true){
             countvida = countvida - 5;
             
             countvidainimigo = countvidainimigo - 10;
      }       
-    }public void Danoslo2(){
+    }
+    /**
+     * Método para contar vida do inimigo.
+     */
+    public void Danoslo2(){
         boolean status = tyra.getBoundsInLocal().intersects(soldado2.getBoundsInLocal());
         if(status == true){
            countvida = countvida - 6;
@@ -123,4 +152,21 @@ public class syberian1 extends Scene{
         countvidainimigo -= 10;
         Barravidainimigo.setWidth(Barravidainimigo.getWidth()-20);
     }
+
+    public Personagem getTyra() {
+        return tyra;
+    }
+
+    public Inimigo getSoldado() {
+        return soldado;
+    }
+
+    public Tiro getTiro() {
+        return tiro;
+    }
+
+    public Pane getRoot2() {
+        return root;
+    }
+     
     }

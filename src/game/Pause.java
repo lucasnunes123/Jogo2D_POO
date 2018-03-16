@@ -13,6 +13,10 @@ import javafx.scene.text.Font;
  *
  * @author Lucas Nunes GS
  */
+/**
+ * 
+ * Classe Tela de pause.
+ */
 public class Pause extends Scene {
     private final Image fundopause = new Image("ima/gover.png");
     Label Label_pause,label_continue,label_sair;
@@ -20,7 +24,12 @@ public class Pause extends Scene {
     Font fontepause = Font.loadFont(Menu.class.getResource("/ima/upheavtt.ttf").toExternalForm(), 50);
     Font fonte = Font.loadFont(Menu.class.getResource("/ima/upheavtt.ttf").toExternalForm(), 30);
 
-    
+    /**
+     * 
+     * @param root Nó raiz.
+     * @param width Definindo largura na tela de pause.
+     * @param height Definido altura na tela de pause.
+     */
     public Pause(Pane root, double width, double height) {
         super(root, 800, 400);
         ImageView fundo = new ImageView(fundopause);

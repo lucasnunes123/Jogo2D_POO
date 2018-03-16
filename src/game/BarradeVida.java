@@ -6,6 +6,11 @@ import javafx.scene.shape.Rectangle;
  *
  * @author Lucas Nunes GS
  */
+
+/**
+ * 
+ *  Classe para a barra de vida do personagem.
+ */
 public class BarradeVida extends Rectangle {
         public BarradeVida(){
             this.setX(26);

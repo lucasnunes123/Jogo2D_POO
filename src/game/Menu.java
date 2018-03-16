@@ -11,10 +11,20 @@ import javafx.scene.text.Font;
  *
  * @author Lucas Nunes GS
  */
+/**
+ * 
+ * Classe tala de menu.
+ */
 public class Menu extends Scene{
     
     private final Image fundo = new Image("ima/menu.png");
     private final Label enter, esc;
+    /**
+     * 
+     * @param root Nó raiz.
+     * @param width definindo largura da tela de menu.
+     * @param height definindo altura da tela de menu.
+     */
     public Menu(Pane root, double width, double height) {
         super(root, width, height);
         

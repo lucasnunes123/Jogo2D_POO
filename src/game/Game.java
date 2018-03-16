@@ -11,12 +11,16 @@ import javafx.stage.Stage;
  *
  * @author Lucas Nunes GS
  */
+/**
+ * 
+ *  Classe MAIN do jogo.
+ */
 public class Game extends Application {
     private final int posX = 25;
     private final int posY = 290;
     
     /**
-     * Adicionando Audio
+     *  Adicionando Audio menu,gameover,1° e 2° fase.
      */   
     AudioClip MMenu = new AudioClip(getClass().getResource("/audio/menu.mp3").toString());              
     AudioClip MFase1 = new AudioClip(getClass().getResource("/audio/fase1.mp3").toString());            
@@ -27,41 +31,41 @@ public class Game extends Application {
     @Override
     public void start(Stage primaryStage) {
         /**
-         * Tela Menu
+         *  Tela Menu e adicionando a primeira tela.
          */
         Pane rootMenu = new Pane();  
         Menu menu = new Menu(rootMenu, 800, 400);
         primaryStage.setScene(menu);
         MMenu.play();
-        
         /**
-         * Tela 1°Fase
+         *  Tela 1°fase.
          */
         Pane rootmetal = new Pane();
         syberian1 metal = new syberian1(rootmetal, 800, 400);
         /**
-         * Tela GameOver
+         *  Tela GameOver.
          */
         Pane rootgame = new Pane();
         GameOver over = new GameOver(rootgame, 800, 400);
         /**
-         * Tela 2°Fase
+         *  Tela 2°Fase.
          */
         Pane root2 = new Pane();
         Desert deserto = new Desert(root2, 800, 400);
         /**
-         * Tela de Vitoria
+         *  Tela de Vitoria.
          */
         Pane rootG = new Pane();
         parabens Parabens = new parabens(rootG, 800, 400);
         /**
-         * Tela de Pause
+         *  Tela de Pause.
          */
         Pane rootpause = new Pane();
         Pause pause = new Pause(rootpause, 800, 400);
         
         /**
-        *Chamando menu
+        *   Chamando menu,ao clicar ENTER será direcionado a tela da 1° fase.
+        *   Ao clicar em ESC o jogo será fechado.
         */
         menu.setOnKeyPressed((KeyEvent event)-> {
             if(event.getCode().equals(KeyCode.ENTER)){
@@ -77,7 +81,8 @@ public class Game extends Application {
         primaryStage.show();
  
         /**
-         * Config:1° Fase
+         *  Capturando Eventos de tecla para a movimentação do personagem,contando dano do Personagem e inimigos.
+         *  chamando telas de 2°fase e de game over.
          */
         metal.setOnKeyPressed((KeyEvent event) -> {
             metal.Danotyra();
@@ -96,7 +101,9 @@ public class Game extends Application {
                 primaryStage.setScene(deserto);
             }
             
-            //Tela de Game Over
+            /**
+             *  tela de game over com eventos das treclas ENTER e ESC.
+             */
             over.setOnKeyPressed((KeyEvent event1) -> {
                 if(event1.getCode().equals(KeyCode.ESCAPE)){
                     primaryStage.close();                 
@@ -117,12 +124,7 @@ public class Game extends Application {
                     metal.contvidaini = 100;                      //colocando os dados iniciais do 2° Soldado
                 }                    
             });
-            
-
-            if(event.getCode().equals(KeyCode.E)){
-                metal.danoInimigo();
-            }
-            
+          
             if(event.getCode().equals(KeyCode.RIGHT)) {
                 metal.tyra.moverD();
                 metal.soldado.moverD1();
@@ -136,16 +138,20 @@ public class Game extends Application {
             }
             if(event.getCode().equals(KeyCode.DOWN)) { 
                 metal.tyra.Baixo();
-            }if(event.getCode().equals(KeyCode.ENTER)) {
-                
-            }if(event.getCode().equals(KeyCode.ESCAPE)){
+            }
+            if(event.getCode().equals(KeyCode.ESCAPE)){
                 primaryStage.setScene(menu);
             }if(event.getCode().equals(KeyCode.SPACE)){
                 primaryStage.setScene(pause);  
+            }if(event.getCode().equals(KeyCode.SHIFT)){
+                System.out.println("wendel morreu!");
+                metal.getTiro().atirar(metal.getSoldado().getX(), metal.getTyra().getX(), metal.getRoot2());
+                
             }
+            
         });
         /**
-         * Tela Pause
+         *  tela de pause com eventos de tecla SPACE para pausar o jogo e da tecla S para fechar o jogo..
          */
         pause.setOnKeyPressed((KeyEvent event) -> {
               if(event.getCode().equals(KeyCode.SPACE)){
@@ -155,13 +161,13 @@ public class Game extends Application {
             }    
         });
         /**
-         * Tela de 2°Fase
+         *  Tela de 2° fase com eventos de tecla de movimento e tela de Vitória.
          */
         deserto.setOnKeyPressed((KeyEvent event) -> {
             Gover.stop();
             deserto.Danotyra();
             deserto.countvida();
-            
+ 
             if(deserto.countvida == 0){
                 primaryStage.setScene(over);
                 MFase2.stop();
@@ -182,6 +188,10 @@ public class Game extends Application {
             }
             if(event.getCode().equals(KeyCode.DOWN)) { 
                 deserto.tyra.Baixo();
+            }if(event.getCode().equals(KeyCode.SHIFT)){
+                System.out.println("wendel morreu!");
+                metal.getTiro().atirar(deserto.getSoldado().getX(), deserto.getTyra().getX(), deserto.getRoot2());
+                
             }
         });    
     }
